@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obiettivo Risarcimento – Vittime di Malasanità: ottieni il tuo risarcimento</title>
+  <meta name="description" content="La prima società italiana di tutoring per le vittime di malasanità. Consulenza gratuita, nessun intermediario. Ottieni il risarcimento che meriti." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #111827;
+      background: #f8fafc;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    :root {
+      --blue:       #1d4ed8;
+      --blue-dark:  #1e3a8a;
+      --blue-light: #eff6ff;
+      --red:        #dc2626;
+      --red-dark:   #b91c1c;
+      --text:       #111827;
+      --muted:      #6b7280;
+      --border:     #e5e7eb;
+      --white:      #ffffff;
+      --bg:         #f8fafc;
+    }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    .hero > .container { max-width: 1280px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px;
+      transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      border-bottom-color: var(--border);
+      box-shadow: 0 1px 12px rgba(0,0,0,.06);
+    }
+    .navbar-logo { display: flex; align-items: center; text-decoration: none; }
+    .navbar-logo img { height: 40px; width: auto; filter: brightness(0) invert(1); transition: filter .3s; }
+    .navbar.scrolled .navbar-logo img { filter: none; }
+    .navbar-nav { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .navbar-nav a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.9); text-decoration: none; transition: color .2s; }
+    .navbar-nav a:hover { color: white; }
+    .navbar.scrolled .navbar-nav a { color: var(--text); }
+    .navbar.scrolled .navbar-nav a:hover { color: var(--blue); }
+    .navbar-cta {
+      background: var(--red); color: var(--white);
+      font-size: 14px; font-weight: 700;
+      padding: 10px 22px; border-radius: 8px;
+      text-decoration: none; transition: background .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .navbar-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+    @media (max-width: 768px) { .navbar-nav { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 60px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 60%, #2563eb 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero > .container { width: 100%; }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 75% 40%, rgba(96,165,250,.18) 0%, transparent 65%),
+                  radial-gradient(ellipse at 10% 80%, rgba(30,58,138,.5) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C15 0 45 16 60 8' stroke='white' stroke-width='0.6' stroke-opacity='0.022' fill='none'/%3E%3Cpath d='M0 22 C15 14 45 30 60 22' stroke='white' stroke-width='0.6' stroke-opacity='0.016' fill='none'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 520px;
+      gap: 60px;
+      align-items: start;
+      position: relative; z-index: 1;
+    }
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.15);
+      color: rgba(255,255,255,.95);
+      font-size: 12px; font-weight: 600;
+      padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(4px);
+    }
+    .hero-badge::before { content: '✦'; font-size: 10px; }
+    .hero h1 {
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: #60c8f0;
+      position: relative;
+      white-space: nowrap;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,.8);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      max-width: 500px;
+    }
+    .hero-features { list-style: none; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .hero-features li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,.9);
+    }
+    .hero-features li .feat-icon {
+      width: 26px; height: 26px; flex-shrink: 0;
+      background: rgba(255,255,255,.15);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .hero-features li .feat-icon svg { width: 13px; height: 13px; fill: white; }
+    .feat-text strong { display: block; font-weight: 600; font-size: 13px; color: white; }
+    .feat-text span { font-size: 12px; color: rgba(255,255,255,.6); }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+    @media (max-width: 600px) {
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-secondary { width: 100%; justify-content: center; }
+    }
+    .btn-primary {
+      background: var(--red); color: white;
+      font-size: 15px; font-weight: 700;
+      padding: 13px 26px; border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,.4); }
+    .btn-secondary {
+      background: rgba(255,255,255,.12); color: white;
+      font-size: 15px; font-weight: 600;
+      padding: 13px 22px; border-radius: 10px;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,.35);
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.22); }
+    .hero-trust { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .hero-trust-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: rgba(255,255,255,.7); font-weight: 500;
+    }
+    .hero-trust-item svg { width: 15px; height: 15px; fill: #4ade80; }
+
+    /* ── HERO FORM ── */
+    .hero-form-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 28px;
+      box-shadow: 0 8px 20px -2px rgba(0,0,0,.16), 0 32px 80px -10px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.12);
+      border: 1px solid var(--border);
+      position: sticky;
+      top: 84px;
+    }
+    .hero-form-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .hero-form-card > p { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 9px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px; font-family: inherit;
+      color: var(--text);
+      background: white;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(29,78,216,.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 68px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .form-privacy-check {
+      display: flex; align-items: flex-start; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .form-privacy-check input[type=checkbox] { width: auto; margin-top: 2px; flex-shrink: 0; accent-color: var(--blue); }
+    .form-privacy-check label { font-size: 11px; color: var(--muted); font-weight: 400; cursor: pointer; }
+    .form-privacy-check a { color: var(--blue); }
+    .form-submit-btn {
+      width: 100%; padding: 12px;
+      background: var(--red); color: white;
+      font-size: 14px; font-weight: 700;
+      border: none; border-radius: 10px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background .2s, transform .2s;
+    }
+    .form-submit-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .form-note {
+      text-align: center; font-size: 11px; color: var(--muted);
+      margin-top: 8px;
+    }
+    .form-success {
+      display: none;
+      text-align: center; padding: 40px 20px;
+    }
+    .form-success .success-icon {
+      width: 56px; height: 56px;
+      background: #dcfce7; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .form-success .success-icon svg { width: 28px; height: 28px; fill: #16a34a; }
+    .form-success h4 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .form-success p { font-size: 14px; color: var(--muted); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--blue);
+      padding: 48px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; } }
+    .stat-item {}
+    .stat-number {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,.75);
+      font-weight: 500;
+    }
+
+    /* ── SCROLL DOWN ARROW ── */
+    .scroll-down-arrow {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 10;
+      text-decoration: none;
+      animation: arrowBounce 2s ease-in-out infinite;
+    }
+    .scroll-down-arrow span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+    }
+    .scroll-down-arrow svg {
+      width: 28px;
+      height: 28px;
+      stroke: rgba(255,255,255,.7);
+      stroke-width: 2;
+      fill: none;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,.25));
+      transition: stroke .2s;
+    }
+    .scroll-down-arrow:hover svg { stroke: #fff; }
+    @keyframes arrowBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(9px); }
+    }
+
+    /* ── CHI SIAMO ── */
+    .about-section { padding: 96px 0; background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .section-tag {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 16px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 100px;
+      border: 1px solid #bfdbfe;
+    }
+    .about-grid .section-tag,
+    .contact-content .section-tag { margin-left: 0; }
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    .section-sub {
+      font-size: 16px; color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      text-align: center;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Override per sezioni a due colonne */
+    .about-grid .section-title,
+    .about-grid .section-sub,
+    .contact-content .section-title,
+    .contact-content .section-sub { text-align: left; margin-left: 0; margin-right: 0; }
+    .about-quote {
+      border-left: 4px solid var(--blue);
+      padding: 16px 20px;
+      background: var(--blue-light);
+      border-radius: 0 10px 10px 0;
+      font-size: 15px; font-style: italic;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .about-img-wrap { position: relative; border-radius: 20px; overflow: hidden; }
+    .about-img-wrap img { width: 100%; height: 380px; object-fit: cover; display: block; }
+    .about-img-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.7));
+      padding: 32px 24px 20px;
+      color: white;
+    }
+    .about-img-caption strong { display: block; font-size: 15px; font-weight: 700; }
+    .about-img-caption span { font-size: 13px; opacity: .85; }
+
+    /* ── TEAM ── */
+    .team-section { padding: 96px 0; background: white; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+    @media (max-width: 768px) { .team-grid { grid-template-columns: 1fr; } }
+    .team-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .team-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .team-card-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .team-card-body { padding: 24px; }
+    .team-card-tag {
+      display: inline-block;
+      background: var(--blue-light); color: var(--blue);
+      font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 100px;
+      margin-bottom: 12px;
+      border: 1px solid #bfdbfe;
+    }
+    .team-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+    .team-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── PROCESS ── */
+    .process-section { padding: 96px 0; background: var(--bg); }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+      position: relative;
+    }
+    @media (max-width: 768px) { .process-grid { grid-template-columns: 1fr; } }
+    .process-connector {
+      position: absolute;
+      top: 42px; left: calc(33.33% - 16px); right: calc(33.33% - 16px);
+      height: 2px; background: #bfdbfe;
+      pointer-events: none;
+    }
+    @media (max-width: 768px) { .process-connector { display: none; } }
+    .process-card {
+      background: white;
+      border-radius: 16px;
+      padding: 36px 28px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .process-number {
+      font-size: 56px; font-weight: 900;
+      color: #dbeafe;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .process-arrow {
+      position: absolute;
+      top: 38px; right: -22px;
+      width: 44px; height: 44px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+    }
+    .process-arrow svg { width: 18px; height: 18px; fill: white; }
+    .process-card:last-child .process-arrow { display: none; }
+    @media (max-width: 768px) { .process-arrow { display: none; } }
+    .process-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+    .process-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── WHY US ── */
+    .why-section { padding: 96px 0; background: var(--bg); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    @media (max-width: 960px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }
+    .why-card {
+      background: white;
+      border-radius: 16px; padding: 32px 28px;
+      border: 1px solid var(--border);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .why-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.08); transform: translateY(-3px); }
+    .why-card.featured { box-shadow: 0 8px 32px rgba(29,78,216,.15); border-color: #bfdbfe; }
+    .why-icon {
+      width: 48px; height: 48px;
+      background: var(--blue-light); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .why-icon svg { width: 24px; height: 24px; fill: var(--blue); }
+    .why-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+    .why-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .why-card-link { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--blue); text-decoration: none; }
+    .why-card-link:hover { text-decoration: underline; }
+
+    /* ── TIPOLOGIE ── */
+    .tipologie-section { padding: 96px 0; background: white; }
+    .pills-wrap {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 12px; margin-top: 48px;
+    }
+    .pill {
+      border: 1.5px solid #bfdbfe;
+      color: var(--text);
+      font-size: 14px; font-weight: 500;
+      padding: 10px 22px; border-radius: 100px;
+      background: white;
+      cursor: default;
+      transition: background .2s, color .2s;
+    }
+    .pill:hover { background: var(--blue-light); color: var(--blue); }
+    .pills-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 32px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section { padding: 96px 0; background: var(--bg); }
+    .google-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; border: 1px solid var(--border);
+      border-radius: 100px; padding: 6px 14px;
+      font-size: 13px; font-weight: 600; color: var(--text);
+    }
+    .google-badge svg { width: 16px; height: 16px; }
+    /* Carousel */
+    .carousel-wrap { position: relative; margin-top: 48px; }
+    .carousel-viewport { overflow: hidden; }
+    .testimonials-track {
+      display: flex;
+      gap: 24px;
+      transition: transform .4s ease;
+    }
+    .testimonial-card {
+      background: white;
+      border-radius: 16px; padding: 28px;
+      border: 1px solid var(--border);
+      transition: box-shadow .25s;
+      flex: 0 0 calc((100% - 48px) / 3);
+      min-width: 0;
+    }
+    @media (max-width: 960px) { .testimonial-card { flex: 0 0 calc((100% - 24px) / 2); } }
+    @media (max-width: 600px) { .testimonial-card { flex: 0 0 100%; } }
+    .testimonial-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.07); }
+    .testimonial-stars { color: #f59e0b; font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 15px; color: var(--text);
+      line-height: 1.7; margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--blue); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 14px; font-weight: 700; }
+    .testimonial-meta { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .testimonial-meta svg { width: 12px; height: 12px; }
+    /* Carousel controls */
+    .carousel-controls {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin-top: 32px;
+    }
+    .carousel-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1.5px solid var(--border); background: white;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all .2s; color: var(--text);
+    }
+    .carousel-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .carousel-btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
+    .carousel-dots { display: flex; gap: 6px; align-items: center; }
+    .carousel-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--border); border: none; padding: 0; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .carousel-dot.active { background: var(--blue); transform: scale(1.3); }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      padding: 96px 0;
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8 C15 0 45 16 60 8' stroke='white' stroke-width='0.6' stroke-opacity='0.022' fill='none'/%3E%3Cpath d='M0 22 C15 14 45 30 60 22' stroke='white' stroke-width='0.6' stroke-opacity='0.016' fill='none'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .cta-band-inner { position: relative; z-index: 1; }
+    .cta-band-inner { text-align: center; }
+    .cta-band h2 { font-size: clamp(28px, 4.5vw, 44px); font-weight: 900; color: white; margin-bottom: 20px; }
+    .cta-band p { font-size: 18px; color: rgba(255,255,255,.85); margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .btn-white {
+      background: white; color: var(--blue);
+      font-size: 16px; font-weight: 700;
+      padding: 18px 40px; border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+    .cta-trust {
+      display: flex; align-items: center; justify-content: center; gap: 24px;
+      margin-top: 24px; flex-wrap: wrap;
+    }
+    .cta-trust span { font-size: 14px; color: rgba(255,255,255,.7); }
+
+    /* ── SECOND FORM SECTION ── */
+    .contact-section { padding: 96px 0; background: white; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .contact-content .section-title { text-align: left; }
+    .checklist { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 12px; }
+    .checklist li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; color: var(--text);
+    }
+    .checklist li::before {
+      content: '';
+      width: 22px; height: 22px; flex-shrink: 0;
+      background: var(--blue); border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+      background-size: 14px; background-repeat: no-repeat; background-position: center;
+    }
+    .contact-form-card {
+      background: white;
+      border-radius: 20px; padding: 40px 36px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,.07), 0 20px 60px -10px rgba(0,0,0,.12);
+      border: 1px solid var(--border);
+    }
+    .contact-form-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .contact-form-card > p { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 96px 0; background: var(--bg); }
+    .faq-card {
+      background: white; border-radius: 20px;
+      border: 1px solid var(--border);
+      max-width: 720px; margin: 48px auto 0;
+      overflow: hidden;
+    }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      width: 100%; padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: none; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 500; color: var(--text);
+      text-align: left; gap: 16px;
+      font-family: inherit;
+    }
+    .faq-icon {
+      width: 30px; height: 30px; flex-shrink: 0;
+      background: var(--blue-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .3s;
+    }
+    .faq-icon svg { width: 14px; height: 14px; fill: var(--blue); transition: transform .3s; }
+    .faq-item.open .faq-q { font-weight: 600; }
+    .faq-item.open .faq-icon { background: var(--blue); }
+    .faq-item.open .faq-icon svg { fill: white; transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { padding: 0 28px 22px; font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+    /* ── FOOTER ── */
+    .footer { background: #0f172a; padding: 64px 0 32px; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .footer-logo-wrap { display: flex; align-items: center; margin-bottom: 16px; }
+    .footer-logo-wrap img { height: 36px; width: auto; filter: brightness(0) invert(1); }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.75; max-width: 300px; }
+    .footer-col h4 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.4); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul a { font-size: 14px; color: rgba(255,255,255,.6); text-decoration: none; transition: color .2s; }
+    .footer-col ul a:hover { color: white; }
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-bottom a { color: rgba(255,255,255,.4); text-decoration: none; }
+    .footer-bottom a:hover { color: white; }
+
+    /* ── ZERO COST MODAL ── */
+    .zero-trigger {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 10px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      color: white; font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: 100px;
+      cursor: pointer; transition: background .2s;
+      font-family: inherit;
+    }
+    .zero-trigger:hover { background: rgba(255,255,255,.25); }
+    .zero-trigger .q-icon {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; line-height: 1;
+    }
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(15,23,42,.6);
+      backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: white; border-radius: 20px;
+      max-width: 560px; width: 100%;
+      padding: 36px 36px 32px;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,.25);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--bg); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--muted); transition: background .2s;
+    }
+    .modal-close:hover { background: var(--border); }
+    .modal-box h3 {
+      font-size: 20px; font-weight: 800;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .modal-box .modal-sub {
+      font-size: 13px; color: var(--muted); margin-bottom: 20px;
+    }
+    .modal-box p {
+      font-size: 14px; color: var(--text); line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .modal-box p:last-of-type { margin-bottom: 0; }
+    .modal-highlight {
+      background: var(--blue-light);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      font-size: 14px; font-weight: 600;
+      color: var(--blue);
+      margin: 20px 0 0;
+    }
+
+    /* ── COOKIE BAR ── */
+    .cookie-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+      background: #1e293b; color: white;
+      padding: 16px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      flex-wrap: wrap;
+      transform: translateY(100%);
+      transition: transform .4s ease;
+    }
+    .cookie-bar.show { transform: none; }
+    .cookie-bar span { font-size: 13px; color: rgba(255,255,255,.8); }
+    .cookie-bar a { color: #93c5fd; }
+    .cookie-bar button {
+      background: var(--blue); color: white;
+      font-size: 13px; font-weight: 600;
+      padding: 8px 20px; border-radius: 6px;
+      border: none; cursor: pointer; white-space: nowrap;
+    }
+
+    /* ── CASES SECTION ── */
+    .cases-section { padding: 96px 0; background: white; }
+    .cases-header { text-align: center; margin-bottom: 60px; }
+    .cases-header h2 { font-size: clamp(28px, 4.5vw, 44px); font-weight: 900; color: var(--text); margin-bottom: 12px; }
+    .cases-header p { font-size: 18px; color: var(--muted); max-width: 560px; margin: 0 auto; }
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .case-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: all .3s ease;
+      cursor: pointer;
+    }
+    .case-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+    .case-content { }
+    .case-title {
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .case-description {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .case-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      border: 1.5px solid var(--blue);
+      border-radius: 8px;
+      padding: 8px 18px;
+      background: transparent;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      pointer-events: none;
+    }
+    .case-card:hover .case-btn {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* ── MODAL STYLES ── */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      animation: fadeInModal .3s ease;
+    }
+    @keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 0;
+      width: 90%;
+      max-width: 700px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      animation: slideInModal .3s ease;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    @keyframes slideInModal { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .modal-header {
+      background: var(--blue);
+      padding: 30px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 16px 16px 0 0;
+    }
+    .modal-body { padding: 30px; }
+    .modal-title { font-size: 24px; margin: 0; flex: 1; font-weight: 700; }
+    .close-btn {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .2s;
+    }
+    .close-btn:hover { transform: rotate(90deg); }
+    .modal-text {
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+    .modal-text strong { color: var(--blue); font-weight: 700; }
+    .modal.active { display: block; }
+    @media (max-width: 768px) {
+      .modal-content { width: 95%; margin: 20% auto; }
+      .cases-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#" class="navbar-logo">
+    <img src="logo.png" alt="Obiettivo Risarcimento" />
+  </a>
+  <ul class="navbar-nav">
+    <li><a href="#chi-siamo">Chi siamo</a></li>
+    <li><a href="#come-funziona">Come funziona</a></li>
+    <li><a href="#storie">Recensioni</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contatti" class="navbar-cta">Valutazione gratuita</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+
+<div class="container">
+    <div class="hero-grid">
+      <div class="hero-left reveal">
+        <div class="hero-badge">Prima società italiana di tutoring per vittime di malasanità</div>
+        <h1>Hai subito un possibile caso di <em>malasanità?</em><br>Valutiamo il tuo caso gratuitamente.</h1>
+        <p class="hero-sub">Un team di medici legali e avvocati analizza la documentazione e ti indica, senza impegno, se ci sono i presupposti per un risarcimento.</p>
+        <ul class="hero-features">
+          <li>
+            <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+            <div class="feat-text"><strong>Valutazione gratuita e senza impegno</strong><span>Nessun costo iniziale, nessun vincolo</span></div>
+          </li>
+          <li>
+            <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg></div>
+            <div class="feat-text"><strong>Riservatezza e gestione umana del caso</strong><span>Ogni storia è trattata con discrezione</span></div>
+          </li>
+          <li>
+            <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+            <div class="feat-text"><strong>Analisi medico-legale + legale</strong><span>Team multidisciplinare interno, senza intermediari</span></div>
+          </li>
+        </ul>
+        <div class="hero-actions">
+          <a href="#contatti" class="btn-primary">Richiedi valutazione gratuita →</a>
+          <a href="#come-funziona" class="btn-secondary">Come funziona</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Senza intermediari
+          </div>
+          <div class="hero-trust-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Risposta entro 24/48h
+          </div>
+          <div class="hero-trust-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Massima riservatezza
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM HERO -->
+      <div class="hero-form-card reveal">
+        <h3>Richiedi la tua valutazione</h3>
+        <p>Compila il modulo. Un nostro consulente ti ricontatterà al più presto.</p>
+        <form id="hero-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="h-nome">Nome e Cognome *</label>
+              <input type="text" id="h-nome" name="nome_cognome" placeholder="Mario Rossi" required />
+            </div>
+            <div class="form-group">
+              <label for="h-telefono">Telefono *</label>
+              <input type="tel" id="h-telefono" name="telefono" placeholder="+39 333 000 0000" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="h-email">Email *</label>
+              <input type="email" id="h-email" name="email" placeholder="mario@email.it" required />
+            </div>
+            <div class="form-group">
+              <label for="h-regione">Provincia / Regione</label>
+              <input type="text" id="h-regione" name="regione" placeholder="es. Treviso (TV)" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="h-tipo">Tipo di danno subito</label>
+            <select id="h-tipo" name="tipo_danno">
+              <option value="">— Seleziona —</option>
+              <option>Errore chirurgico</option>
+              <option>Diagnosi errata o tardiva</option>
+              <option>Infezione ospedaliera</option>
+              <option>Errore farmacologico</option>
+              <option>Danno da parto</option>
+              <option>Danno estetico da intervento</option>
+              <option>Decesso del familiare</option>
+              <option>Altro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="h-msg">Descrivi brevemente l'accaduto</label>
+            <textarea id="h-msg" name="messaggio" placeholder="Racconta in poche righe cosa è successo. Non servono dettagli tecnici in questa fase."></textarea>
+          </div>
+          <div class="form-privacy-check">
+            <input type="checkbox" id="h-privacy" name="privacy" required />
+            <label for="h-privacy">Ho letto e accetto l'<a href="#">Informativa Privacy</a>. Acconsento al trattamento dei dati per ricevere la valutazione del caso. *</label>
+          </div>
+          <p class="form-note" style="font-size:12px; color:var(--muted); margin-bottom:12px;">Non condividiamo i tuoi dati. Ti contattiamo solo per la valutazione del caso.</p>
+          <button type="submit" class="form-submit-btn">Invia richiesta →</button>
+        </form>
+        <div class="form-success" id="hero-success">
+          <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+          <h4>Richiesta inviata!</h4>
+          <p>Ti contatteremo entro 24 ore lavorative per la tua valutazione gratuita.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll down arrow -->
+  <a class="scroll-down-arrow" href="#chi-siamo" aria-label="Scopri di più">
+    <span>Scopri di più</span>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </a>
+</section>
+
+<!-- CHI SIAMO -->
+<section class="about-section" id="chi-siamo">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-tag">Chi siamo</div>
+        <h2 class="section-title">La prima società italiana di tutoring per le vittime di malasanità</h2>
+        <p class="section-sub">Obiettivo Risarcimento nasce con una missione precisa: essere al fianco delle persone che hanno subito un danno a causa di un errore medico, guidandole in ogni fase del percorso verso un giusto risarcimento.</p>
+        <p class="section-sub" style="margin-top:-12px;">Il nostro team altamente specializzato si avvale di consulenze legali, mediche, medico-legali e tecniche, in grado di ottimizzare le tempistiche e di adeguare il risultato economico al profilo di ogni singolo assistito.</p>
+        <div class="about-quote">"Non utilizziamo intermediari. Gestiamo ogni caso internamente con il nostro team di professionisti, garantendo massima qualità e riservatezza."</div>
+        <p style="font-size:14px; color:var(--muted);">Gestiamo con successo casi di malasanità, sinistri stradali, infortuni sul lavoro, malattie professionali e molte altre tipologie di infortuni. La nostra sede centrale si trova a Villorba (Treviso), ma operiamo su tutto il territorio nazionale.</p>
+      </div>
+      <div class="about-img-wrap reveal">
+        <img src="sede.jpg" alt="Sede Obiettivo Risarcimento" />
+        <div class="about-img-caption">
+          <strong>Sede centrale di Obiettivo Risarcimento</strong>
+          <span>Viale della Repubblica 12/26 — 31020 Villorba (Treviso)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Casi valutati con esito positivo</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-number">21+</div>
+        <div class="stat-label">Avvocati specializzati</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-number">46+</div>
+        <div class="stat-label">Medici legali nel team</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-number">€0</div>
+        <div class="stat-label">Costo iniziale per te</div>
+        <button class="zero-trigger" onclick="document.getElementById('zero-modal').classList.add('open')">
+          <span class="q-icon">?</span> Scopri perché
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="container text-center">
+    <div class="section-tag">Il nostro team</div>
+    <h2 class="section-title">I professionisti che si occuperanno del tuo caso</h2>
+    <p class="section-sub" style="max-width:600px; margin:0 auto;">Un team multidisciplinare di avvocati e medici legali lavora in sinergia per analizzare ogni caso con rigore scientifico e sensibilità umana.</p>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <img class="team-card-img" src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80" alt="Avvocati Specializzati" />
+        <div class="team-card-body">
+          <div class="team-card-tag">Consulenza Legale</div>
+          <h3>Avvocati Specializzati</h3>
+          <p>I nostri avvocati esperti in responsabilità medica ti accompagnano in ogni fase, dalla valutazione iniziale fino alla chiusura della pratica, tutelando i tuoi interessi in modo completo.</p>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <img class="team-card-img" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80" alt="Medici Legali" />
+        <div class="team-card-body">
+          <div class="team-card-tag">Analisi Medico-Legale</div>
+          <h3>Medici Legali Esperti</h3>
+          <p>Il nostro team di medici legali esamina la documentazione clinica con rigore scientifico, identificando eventuali negligenze e quantificando il danno subito in modo preciso e documentato.</p>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <img class="team-card-img" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80" alt="Gestori di Pratica" />
+        <div class="team-card-body">
+          <div class="team-card-tag">Gestione Completa</div>
+          <h3>Gestori di Pratica Senior</h3>
+          <p>Un referente dedicato segue il tuo caso dall'inizio alla fine, coordinando il team e tenendoti aggiornato su ogni sviluppo. Non sei mai solo in questo percorso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section class="process-section" id="come-funziona">
+  <div class="container text-center">
+    <div class="section-tag">Il processo</div>
+    <h2 class="section-title">Come funziona</h2>
+    <p class="section-sub" style="max-width:560px; margin:0 auto;">Tre passaggi semplici per sapere se hai diritto a un risarcimento. Senza burocrazia, senza costi iniziali.</p>
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <div class="process-number">01</div>
+        <div class="process-arrow"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <h3>Compili il form</h3>
+        <p>Inserisci i tuoi dati e una breve descrizione dell'accaduto. Non servono documenti in questa fase: bastano poche righe per iniziare.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-number">02</div>
+        <div class="process-arrow"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <h3>Analizziamo il caso</h3>
+        <p>Il nostro team interno di medici legali e avvocati specializzati esamina la situazione da un punto di vista clinico e giuridico.</p>
+      </div>
+      <div class="process-card reveal">
+        <div class="process-number">03</div>
+        <h3>Ricevi la risposta</h3>
+        <p>Ti comunichiamo l'esito entro 24/48 ore. Se ci sono i presupposti, ti spieghiamo chiaramente come procedere e cosa aspettarti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERCHÉ SCEGLIERCI -->
+<section class="why-section" id="perche-noi">
+  <div class="container text-center">
+    <div class="section-tag">Perché sceglierci</div>
+    <h2 class="section-title">La tua tutela è il nostro unico obiettivo</h2>
+    <p class="section-sub" style="max-width:580px; margin:0 auto;">Affidarsi a noi significa scegliere un partner esperto, etico e trasparente, che mette la persona al centro di ogni decisione.</p>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05C16.2 14.07 17 15.12 17 16.5V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <h3>Team multidisciplinare</h3>
+        <p>Medici legali e avvocati specializzati lavorano insieme sul tuo caso, senza intermediari e senza deleghe esterne.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+        </div>
+        <h3>Metodo di analisi documentale</h3>
+        <p>Ogni richiesta viene valutata su solide basi scientifiche. Prima di procedere, analizziamo la documentazione clinica con rigore.</p>
+      </div>
+      <div class="why-card featured reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        </div>
+        <h3>Gestione completa della pratica</h3>
+        <p>Ci occupiamo di ogni aspetto: dall'analisi iniziale all'eventuale azione giudiziaria, anticipando anche le spese processuali.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M11 2L6.5 7H10v10H6.5l4.5 5 4.5-5H12V7h3.5L11 2zm7 14v-2c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2v-2c2.21 0 4 1.79 4 4v4c0 2.21-1.79 4-4 4zM6 16c-2.21 0-4-1.79-4-4v-4C2 5.79 3.79 4 6 4v2C4.9 6 4 6.9 4 8v4c0 1.1.9 2 2 2v2z"/></svg>
+        </div>
+        <h3>Approccio etico e trasparente</h3>
+        <p>Operiamo secondo un rigido codice etico. La persona e la sua famiglia sono sempre al centro della nostra attenzione.</p>
+        <a href="#" class="why-card-link">Leggi il Codice Etico →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPOLOGIE DI CASI -->
+<section class="tipologie-section" id="tipologie">
+  <div class="container text-center">
+    <div class="section-tag">Aree di competenza</div>
+    <h2 class="section-title">Tipologie di casi che trattiamo</h2>
+    <p class="section-sub" style="max-width:580px; margin:0 auto;">Gestiamo con successo diversi tipi di responsabilità medica. Se non vedi il tuo caso, contattaci comunque: ogni situazione merita un'analisi specifica.</p>
+    <div class="pills-wrap reveal">
+      <span class="pill">Errori chirurgici</span>
+      <span class="pill">Diagnosi tardiva o errata</span>
+      <span class="pill">Infezioni ospedaliere</span>
+      <span class="pill">Complicanze da parto</span>
+      <span class="pill">Errori di terapia farmacologica</span>
+      <span class="pill">Danni da vaccino</span>
+      <span class="pill">Consenso informato violato</span>
+      <span class="pill">Infortuni sul lavoro</span>
+      <span class="pill">Sinistri stradali</span>
+      <span class="pill">Malattie professionali</span>
+      <span class="pill">Infortuni sportivi</span>
+      <span class="pill">Altri casi di malpractice</span>
+    </div>
+    <p class="pills-note">* Ogni caso è diverso: la valutazione è sempre basata sulla documentazione clinica disponibile e non costituisce parere legale.</p>
+  </div>
+</section>
+
+<!-- CASES SECTION -->
+<section class="cases-section" id="casi">
+  <div class="container">
+    <div class="cases-header">
+      <div class="section-tag">Storie di successo</div>
+      <h2 class="section-title">Le nostre storie</h2>
+      <p class="section-sub">Casi di malasanità affrontati e risarciti. Clicca per conoscere le storie di chi ha trovato giustizia.</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card reveal" onclick="openModal('luca')">
+        <div class="case-content">
+          <h3 class="case-title">Luca, 18 mesi</h3>
+          <p class="case-description">Cinzia ci racconta la storia di suo figlio Luca, deceduto all'età di 18 mesi, rimasto vittima di malasanità per il ritardo nelle cure da parte del medico pediatra e della pediatria pubblica.</p>
+          <span class="case-btn">Leggi la storia →</span>
+        </div>
+      </div>
+      <div class="case-card reveal" onclick="openModal('mario')">
+        <div class="case-content">
+          <h3 class="case-title">Mario, 58 anni</h3>
+          <p class="case-description">Nel settembre 2004, Mario viene ricoverato per interventi chirurgici delicati. Durante l'operazione subisce una perforazione al colon che provocherà gravi infezioni con danni irreparabili agli organi periferici dell'apparato digerente.</p>
+          <span class="case-btn">Leggi la storia →</span>
+        </div>
+      </div>
+      <div class="case-card reveal" onclick="openModal('paola')">
+        <div class="case-content">
+          <h3 class="case-title">Paola, 37 anni</h3>
+          <p class="case-description">La storia di Paola, moglie di Fabio e mamma di Noemi. Ha subito un danno da malasanità e il suo percorso di recupero fisico e psicologico è un esempio di resilienza e forza d'animo affrontata con grande passione.</p>
+          <span class="case-btn">Leggi la storia →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODALS FOR CASES -->
+<div id="lucaModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Luca, 18 mesi</h2>
+      <button class="close-btn" onclick="closeModal('luca')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <strong>La storia di Luca:</strong> Cinzia ci racconta la storia di suo figlio Luca, deceduto all'età di 18 mesi, rimasto vittima di malasanità per il ritardo nelle cure da parte del medico pediatra e della pediatria pubblica.
+      </div>
+      <div class="modal-text">
+        <strong>I fatti:</strong> Il piccolo Luca aveva una gastroenterite, trattata superficialmente fin dalla prima visita. Anche di fronte ai successivi evidenti segni di disidratazione non vennero adottate le semplici, ma necessarie, cure che l'avrebbero salvato.
+      </div>
+      <div class="modal-text">
+        <strong>L'impatto:</strong> Con grande lucidità e forza d'animo Cinzia ci fa partecipi di come è cambiata radicalmente la sua vita, e del percorso intrapreso che l'ha portata almeno ad ottenere un giusto risarcimento.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="marioModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Mario, 58 anni</h2>
+      <button class="close-btn" onclick="closeModal('mario')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <strong>La storia di Mario:</strong> Con Alziamo la voce si prende il punto di vista della persona che ha subìto un danno derivante da malasanità, per raccontarne i risvolti non solo clinici, ma soprattutto umani e famigliari.
+      </div>
+      <div class="modal-text">
+        <strong>L'evento traumatico:</strong> Nel settembre 2004 all'età di 54 anni, viene ricoverato per essere sottoposto ad alcuni interventi chirurgici, tra cui una delicata operazione congiunta a più fasi a stomaco, pancreas e milza. Durante quest'ultima subisce una perforazione al colon che provocherà gravi infezioni con danni irreparabili agli organi periferici dell'apparato digerente.
+      </div>
+      <div class="modal-text">
+        <strong>Le conseguenze:</strong> I ricoveri, le visite e gli interventi che subirà nei successivi due anni non miglioreranno la situazione: il paziente continuerà a perdere peso fino ad arrivare a 35 kg, manterrà costantemente uno stato febbrile tra i 38 e i 40 gradi e le infezioni (non correttamente sanate) degenereranno in una candida interna compromettendo la sua capacità respiratoria.
+      </div>
+      <div class="modal-text">
+        <strong>Lo stato attuale:</strong> Mario dimostra 30 anni in più rispetto alla sua età biologica ed è costretto ad alimentarsi e bere pochissimo per la mancanza di organi vitali. Una storia di resilienza e sofferenza che ha trovato giustizia attraverso il risarcimento.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="paolaModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Paola, 37 anni</h2>
+      <button class="close-btn" onclick="closeModal('paola')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <strong>La storia di Paola:</strong> Abbiamo conosciuto Paola, il marito Fabio e la loro splendida bambina Noemi. Ci hanno accolto nella loro casa per qualche giorno, li abbiamo seguiti nelle loro vite quotidiane, anche al lavoro.
+      </div>
+      <div class="modal-text">
+        <strong>Una storia di coraggio:</strong> Questo racconta la storia di una ragazza, moglie e mamma di grande coraggio e forza d'animo. E di come la sua storia sia diventata anche la storia della sua famiglia: un percorso di vita, di recupero fisico e psicologico a seguito del danno da malasanità subito.
+      </div>
+      <div class="modal-text">
+        <strong>Il percorso di recupero:</strong> La famiglia, la fisioterapia, il lavoro sono i punti centrali della nuova vita di Paola, affrontata con personalità e grande passione. Una testimonianza di come, con il giusto supporto, sia possibile ricostruire una vita piena e consapevole nonostante i traumi.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="storie">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:0;">
+      <div class="section-tag">Recensioni reali</div>
+      <h2 class="section-title" style="margin-top:8px;">Cosa dicono i nostri clienti</h2>
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-top:12px;">
+        <div class="google-badge">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span>4,3 su 5 · 44 recensioni Google</span>
+          <span style="color:#f59e0b;">★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel-viewport">
+        <div class="testimonials-track" id="testimonialsTrack">
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Mi sono affidata ad Obiettivo Risarcimento per malasanità, ho trovato professionalità e sensibilità. Tutto il team, senza stressarti, ha risolto tutto. Se avete avuto problemi di malasanità rivolgetevi a loro: risolvono veramente ogni situazione. Mi hanno preso per mano fino alla fine con un lieto fine. Grazie!"</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">S</div>
+              <div>
+                <div class="testimonial-name">Sabrina De Zanet</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · 9 mesi fa</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Ottima esperienza. Puntale, preciso, efficace ed estremamente cortese, il team di Obiettivo Risarcimento è una squadra vincente non solo per i risultati ottenuti, ma anche per come accoglie ed affianca il cliente con una consulenza chiara che prospetta realisticamente i vari scenari. Al bisogno non avrei alcun dubbio sul fatto di rivolgermi a loro."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <div class="testimonial-name">Matteo Cappelletto</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · 2 anni fa</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Nel 2022 sono stato investito a piedi da un'anziana signora in auto, con traumi facciali e cervicali che mi hanno limitato in quanto pilota motociclistico nel Campionato Italiano Velocità. Mi sono affidato a Obiettivo Risarcimento: in poco tempo sono riusciti a farmi ottenere un corposo risarcimento. Precisi, efficienti, sempre disponibili. Soddisfatto al 100%."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">F</div>
+              <div>
+                <div class="testimonial-name">Filippo Momesso</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · 3 anni fa</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Mi sono rivolto a loro in un momento molto difficile per me e per la mia famiglia. Non ci siamo dovuti preoccupare di nulla, non abbiamo anticipato un centesimo e loro hanno messo in campo una squadra di professionisti di prim'ordine. Tutto si è concluso al meglio. Esperienza molto positiva."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">R</div>
+              <div>
+                <div class="testimonial-name">Riccardo Comastri</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · un anno fa</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"5 anni fa in un grande ospedale non mi è stato riconosciuto un infarto, con conseguente grave lesione permanente a livello cardiaco. Ho scoperto Obiettivo Risarcimento e da subito ho avuto un'ottima impressione. Sono stata scrupolosamente seguita per tutto l'iter ed oggi, finalmente, mi è stato riconosciuto un equo risarcimento. Non finirò mai di ringraziarli."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">E</div>
+              <div>
+                <div class="testimonial-name">Emmanuele Tremolada</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · 2 anni fa</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Ringrazio Obiettivo Risarcimento per tutte le battaglie sostenute a favore della mia famiglia a causa della morte di mio padre per un errore medico. Si sono fatti carico di tutti i rischi anticipando notevoli costi. I professionisti incontrati mi hanno insegnato a non mollare mai ed aiutato a combattere per una giusta causa. Grazie a tutto lo staff."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">G</div>
+              <div>
+                <div class="testimonial-name">Gabriele Dalla Vecchia</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · 2 anni fa</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Persone altamente qualificate, dal primo incontro ti senti come in una famiglia: ascoltano i tuoi problemi e una parola di conforto non manca mai. Disponibili in qualsiasi momento. Obiettivo raggiunto in pochissimo tempo."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div>
+                <div class="testimonial-name">Mauro De Zan</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · un anno fa</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Da anni mi affido sempre a loro. Eccellenti."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">D</div>
+              <div>
+                <div class="testimonial-name">Davide Campanaro</div>
+                <div class="testimonial-meta"><svg viewBox="0 0 24 24" width="12" height="12"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Recensione Google · 3 settimane fa</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carouselPrev" aria-label="Precedente">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn" id="carouselNext" aria-label="Successiva">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="container">
+    <div class="cta-band-inner reveal">
+      <h2>Pronto a fare chiarezza<br>sul tuo caso?</h2>
+      <p>Non restare nel dubbio. Una valutazione gratuita e riservata può cambiare tutto. Il primo passo dura meno di due minuti.</p>
+      <a href="#contatti" class="btn-white">Richiedi ora la tua valutazione gratuita</a>
+      <div class="cta-trust">
+        <span>Senza impegno</span>
+        <span>·</span>
+        <span>Senza costi</span>
+        <span>·</span>
+        <span>Risposta entro 24/48h</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECOND FORM (CONTATTI) -->
+<section class="contact-section" id="contatti">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-content reveal">
+        <div class="section-tag">Contattaci</div>
+        <h2 class="section-title">Hai subito un danno medico?<br>Raccontaci la tua storia.</h2>
+        <p class="section-sub">Il nostro team analizzerà gratuitamente la tua situazione e ti darà un primo riscontro entro 24 ore lavorative. Non devi anticipare nulla.</p>
+        <ul class="checklist">
+          <li>Consulenza iniziale completamente gratuita</li>
+          <li>Analisi riservata della documentazione medica</li>
+          <li>Nessun intermediario o costo nascosto</li>
+          <li>Team dedicato di esperti in responsabilità medica</li>
+          <li>Aggiornamenti costanti sull'andamento del tuo caso</li>
+        </ul>
+        <div style="margin-top:32px; border-radius:14px; overflow:hidden; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.08);">
+          <iframe
+            src="https://maps.google.com/maps?q=Viale+della+Repubblica+12,+31020+Villorba+TV,+Italia&output=embed&hl=it&z=14"
+            width="100%" height="220" style="display:block; border:0;"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Sede Obiettivo Risarcimento"></iframe>
+          <div style="padding:12px 16px; background:white; display:flex; align-items:center; gap:10px;">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;fill:var(--blue)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span style="font-size:13px;color:var(--muted);">Viale della Repubblica 12/26 — 31020 Villorba (Treviso)</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-card reveal">
+        <h3>Richiedi la tua valutazione</h3>
+        <p>Compila il modulo. Un nostro consulente ti ricontatterà al più presto.</p>
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-nome">Nome e Cognome *</label>
+              <input type="text" id="c-nome" name="nome_cognome" placeholder="Mario Rossi" required />
+            </div>
+            <div class="form-group">
+              <label for="c-telefono">Telefono *</label>
+              <input type="tel" id="c-telefono" name="telefono" placeholder="+39 333 000 0000" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-email">Email *</label>
+              <input type="email" id="c-email" name="email" placeholder="mario@email.it" required />
+            </div>
+            <div class="form-group">
+              <label for="c-regione">Provincia / Regione</label>
+              <input type="text" id="c-regione" name="regione" placeholder="es. Treviso (TV)" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="c-tipo">Tipo di danno subito</label>
+            <select id="c-tipo" name="tipo_danno">
+              <option value="">— Seleziona —</option>
+              <option>Errore chirurgico</option>
+              <option>Diagnosi errata o tardiva</option>
+              <option>Infezione ospedaliera</option>
+              <option>Errore farmacologico</option>
+              <option>Danno da parto</option>
+              <option>Danno estetico da intervento</option>
+              <option>Decesso del familiare</option>
+              <option>Altro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c-msg">Descrivi brevemente l'accaduto</label>
+            <textarea id="c-msg" name="messaggio" placeholder="Racconta in poche righe cosa è successo. Non servono dettagli tecnici in questa fase."></textarea>
+          </div>
+          <div class="form-privacy-check">
+            <input type="checkbox" id="c-privacy" name="privacy" required />
+            <label for="c-privacy">Ho letto e accetto l'<a href="#">Informativa Privacy</a>. Acconsento al trattamento dei dati per ricevere la valutazione del caso. *</label>
+          </div>
+          <p class="form-note">Non condividiamo i tuoi dati. Ti contattiamo solo per la valutazione del caso.</p>
+          <button type="submit" class="form-submit-btn">Invia richiesta →</button>
+        </form>
+        <div class="form-success" id="contact-success">
+          <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+          <h4>Richiesta ricevuta!</h4>
+          <p>Ti contatteremo entro 24 ore lavorative per fissare la tua consulenza gratuita.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container text-center">
+    <div class="section-tag">Hai dubbi?</div>
+    <h2 class="section-title" style="font-size:clamp(30px,5vw,48px);">Domande frequenti</h2>
+    <p class="section-sub" style="max-width:540px; margin:0 auto;">Risposte chiare alle domande più comuni. Se non trovi quello che cerchi, contattaci direttamente.</p>
+    <div class="faq-card reveal">
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">La valutazione è davvero gratuita?<span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sì, completamente. Non paghi nulla per la prima analisi del caso. Il nostro compenso entra in gioco solo se decidiamo di procedere insieme e solo in caso di esito positivo. Zero costi anticipati, zero rischi per te.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Non ho i soldi per affrontare un caso del genere. Come funziona?<span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Non preoccuparti: rischiamo le nostre competenze. Ci paghi solo in caso di risarcimento ottenuto. Per le spese di perizie, visite e terapie, puoi beneficiare gratuitamente del nostro servizio di anticipo spese — ecco perché la gestione in proprio non paga mai.<br><br>Per primi in Italia, ti diamo l'opportunità unica di affrontare anche le controversie più difficili — come quelle contro medici e ospedali — senza toccare i tuoi risparmi. Nessun anticipo di spesa e, in caso negativo, tutti i rischi e i costi sono completamente a nostro carico.<br><br>Nel caso in cui fosse necessaria un'azione giudiziaria, oltre al servizio di anticipo spese, possiamo assumerci gli eventuali costi processuali. In caso di mancato risarcimento, anche tutti i costi relativi alla soccombenza e di controparte.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Quanto tempo serve per una prima risposta?<span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Il nostro team analizza ogni richiesta entro 24/48 ore lavorative dalla ricezione del modulo. Ti contatteremo direttamente per illustrarti l'esito della prima valutazione e i possibili passi successivi.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Che documenti servono per la valutazione?<span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Per la prima fase non è necessario nessun documento: bastano le informazioni che inserisci nel modulo. Se il caso risulta procedibile, ti indicheremo noi esattamente quale documentazione raccogliere. Ci occupiamo di guidarti passo per passo.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Posso contattarvi anche per un familiare?<span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sì. È possibile agire per conto di un familiare che ha subito un danno, anche in caso di decesso. I familiari stretti (coniuge, figli, genitori) possono richiedere un risarcimento per danno morale e materiale. Contattaci per una valutazione specifica.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Cosa succede dopo l'analisi se il caso è procedibile?<span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Ti spiegheremo chiaramente la strategia più adeguata, i tempi previsti e le possibilità concrete di risarcimento. Da quel momento in poi gestiamo noi tutto: documentazione, trattative con le assicurazioni e, se necessario, l'eventuale procedimento giudiziale.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Trattate casi in tutta Italia?<span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Sì, operiamo su tutto il territorio nazionale. La sede centrale è a Villorba (Treviso), ma la prima fase di valutazione avviene sempre in remoto. Puoi contattarci da qualsiasi regione italiana senza dover venire di persona.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <img src="logo.png" alt="Obiettivo Risarcimento" />
+        </div>
+        <p>La prima società italiana di tutoring per le vittime di malasanità, finalizzata all'ottenimento di un giusto risarcimento. Marchio registrato.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Link utili</h4>
+        <ul>
+          <li><a href="https://www.obiettivorisarcimento.it/chisiamo">Chi Siamo</a></li>
+          <li><a href="https://www.obiettivorisarcimento.it/codiceetico">Codice Etico</a></li>
+          <li><a href="https://www.obiettivorisarcimento.it/contatti">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Obiettivo Risarcimento S.R.L. · P.IVA 03708740265 · Viale della Repubblica 12/26, 31020 Villorba (Treviso)</p>
+      <p><a href="#">Cookie Policy</a> · <a href="#">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ZERO COST MODAL -->
+<div class="modal-overlay" id="zero-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('zero-modal').classList.remove('open')">✕</button>
+    <h3>Perché non ti costa nulla?</h3>
+    <p class="modal-sub">Ecco come funziona realmente il nostro modello.</p>
+    <p>Non hai i soldi per tutto questo? Non preoccuparti: <strong>rischiamo le nostre competenze</strong>. Ci paghi solo in caso di risarcimento ottenuto.</p>
+    <p>Per le spese di perizie, visite e terapie, puoi beneficiare gratuitamente del nostro <strong>servizio di anticipo spese</strong>. Ecco perché la gestione in proprio non paga mai.</p>
+    <p>Per primi in Italia, ti diamo l'opportunità unica di affrontare anche le controversie più difficili — come quelle contro medici e ospedali — <strong>senza toccare i tuoi risparmi</strong>. Nessun anticipo di spesa e, in caso negativo, tutti i rischi e i costi sono completamente a nostro carico.</p>
+    <p>E nel caso in cui fosse necessaria un'azione giudiziaria, oltre al servizio di anticipo spese, <strong>possiamo assumerci gli eventuali costi processuali</strong>. In caso di mancato risarcimento, anche tutti i costi relativi alla soccombenza e di controparte.</p>
+    <div class="modal-highlight">Zero anticipi. Zero rischi per te. Paghiamo noi se perdiamo.</div>
+  </div>
+</div>
+
+<!-- COOKIE BAR -->
+<div class="cookie-bar" id="cookie-bar">
+  <span>Utilizziamo cookie tecnici e, previo consenso, cookie analitici per migliorare la navigazione. <a href="#">Leggi la Cookie Policy</a>.</span>
+  <button onclick="acceptCookies()">Accetta e chiudi</button>
+</div>
+
+<script>
+  /* ── Navbar scroll ── */
+  const navbar = document.querySelector('.navbar');
+  function updateNavbar() {
+    if (window.scrollY > 40) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+  updateNavbar();
+
+  /* ── Scroll reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ── Form handler ── */
+  function handleForm(formId, successId) {
+    const form = document.getElementById(formId);
+    const success = document.getElementById(successId);
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+      form.querySelectorAll('[required]').forEach(field => {
+        if (field.type === 'checkbox') {
+          if (!field.checked) { valid = false; field.style.outline = '2px solid #dc2626'; }
+          else field.style.outline = '';
+        } else {
+          if (!field.value.trim()) { valid = false; field.style.borderColor = '#dc2626'; }
+          else field.style.borderColor = '';
+        }
+      });
+      if (!valid) return;
+      const payload = {};
+      new FormData(form).forEach((v, k) => payload[k] = v);
+      console.log('Lead:', payload);
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+  }
+  handleForm('hero-form', 'hero-success');
+  handleForm('contact-form', 'contact-success');
+
+  /* ── Cookie ── */
+  function acceptCookies() {
+    localStorage.setItem('cookies_ok', '1');
+    document.getElementById('cookie-bar').classList.remove('show');
+  }
+  window.addEventListener('load', () => {
+    if (!localStorage.getItem('cookies_ok'))
+      setTimeout(() => document.getElementById('cookie-bar').classList.add('show'), 1000);
+  });
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 76, behavior: 'smooth' }); }
+    });
+  });
+
+  /* ── TESTIMONIALS CAROUSEL ── */
+  (function() {
+    const track = document.getElementById('testimonialsTrack');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const dotsWrap = document.getElementById('carouselDots');
+    if (!track) return;
+
+    let current = 0;
+
+    function visibleCount() {
+      const w = window.innerWidth;
+      if (w <= 600) return 1;
+      if (w <= 960) return 2;
+      return 3;
+    }
+
+    const cards = track.querySelectorAll('.testimonial-card');
+    const total = cards.length;
+
+    function maxIndex() { return total - visibleCount(); }
+
+    // Build dots
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      const n = maxIndex() + 1;
+      for (let i = 0; i < n; i++) {
+        const d = document.createElement('button');
+        d.className = 'carousel-dot' + (i === current ? ' active' : '');
+        d.setAttribute('aria-label', 'Vai alla recensione ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
+      }
+    }
+
+    function goTo(idx) {
+      current = Math.max(0, Math.min(idx, maxIndex()));
+      const cardW = cards[0].getBoundingClientRect().width;
+      const gap = 24;
+      track.style.transform = 'translateX(-' + (current * (cardW + gap)) + 'px)';
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= maxIndex();
+      dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    window.addEventListener('resize', () => { buildDots(); goTo(Math.min(current, maxIndex())); });
+
+    buildDots();
+    goTo(0);
+  })();
+
+  /* ── CASES MODAL FUNCTIONS ── */
+  function openModal(caseId) {
+    const modalId = caseId + 'Modal';
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeModal(caseId) {
+    const modalId = caseId + 'Modal';
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+      event.target.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const modals = document.querySelectorAll('.modal.active');
+      modals.forEach(modal => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    }
+  });
+</script>
+</body>
+</html>

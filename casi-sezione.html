@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Nostri Casi - Obiettivo Risarcimento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #7f8c8d;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .case-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .case-content {
+            padding: 25px;
+        }
+
+        .case-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .case-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-title {
+            font-size: 1.8em;
+            margin: 0;
+            flex: 1;
+        }
+
+        .close-btn {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-text {
+            color: #2c3e50;
+            line-height: 1.8;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .modal-text strong {
+            color: #667eea;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .case-number {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Le Nostre Storie</h1>
+            <p>Casi di malasanità affrontati e risarciti da Obiettivo Risarcimento</p>
+        </div>
+
+        <div class="cases-grid">
+            <!-- Caso Luca -->
+            <div class="case-card" onclick="openModal('luca')">
+                <div class="case-content">
+                    <h3 class="case-title">Luca, 18 mesi</h3>
+                    <p class="case-description">Cinzia ci racconta la storia di suo figlio Luca, deceduto all'età di 18 mesi, rimasto vittima di malasanità per il ritardo nelle cure da parte del medico pediatra e della pediatria pubblica.</p>
+                </div>
+            </div>
+
+            <!-- Caso Mario -->
+            <div class="case-card" onclick="openModal('mario')">
+                <div class="case-content">
+                    <h3 class="case-title">Mario, 58 anni</h3>
+                    <p class="case-description">Nel settembre 2004, Mario viene ricoverato per interventi chirurgici delicati. Durante l'operazione subisce una perforazione al colon che provocherà gravi infezioni con danni irreparabili agli organi periferici dell'apparato digerente.</p>
+                </div>
+            </div>
+
+            <!-- Caso Paola -->
+            <div class="case-card" onclick="openModal('paola')">
+                <div class="case-content">
+                    <h3 class="case-title">Paola, 37 anni</h3>
+                    <p class="case-description">La storia di Paola, moglie di Fabio e mamma di Noemi. Ha subito un danno da malasanità e il suo percorso di recupero fisico e psicologico è un esempio di resilienza e forza d'animo affrontata con grande passione.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per Luca -->
+    <div id="lucaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Luca, 18 mesi</h2>
+                <button class="close-btn" onclick="closeModal('luca')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="case-number">Caso 1</div>
+                <div class="modal-text">
+                    <strong>La storia di Luca:</strong> Cinzia ci racconta la storia di suo figlio Luca, deceduto all'età di 18 mesi, rimasto vittima di malasanità per il ritardo nelle cure da parte del medico pediatra e della pediatria pubblica.
+                </div>
+                <div class="modal-text">
+                    <strong>I fatti:</strong> Il piccolo Luca aveva una gastroenterite, trattata superficialmente fin dalla prima visita. Anche di fronte ai successivi evidenti segni di disidratazione non vennero adottate le semplici, ma necessarie, cure che l'avrebbero salvato.
+                </div>
+                <div class="modal-text">
+                    <strong>L'impatto:</strong> Con grande lucidità e forza d'animo Cinzia ci fa partecipi di come è cambiata radicalmente la sua vita, e del percorso intrapreso che l'ha portata almeno ad ottenere un giusto risarcimento.
+                </div>
+                <div class="modal-text">
+                    <em>Una testimonianza che illustra l'importanza della tempestività nelle cure pediatriche e della responsabilità medica nel salvare vite.</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per Mario -->
+    <div id="marioModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h2 class="modal-title">Mario, 58 anni</h2>
+                <button class="close-btn" onclick="closeModal('mario')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="case-number">Caso 2</div>
+                <div class="modal-text">
+                    <strong>La storia di Mario:</strong> Con Alziamo la voce si prende il punto di vista della persona che ha subìto un danno derivante da malasanità, per raccontarne i risvolti non solo clinici, ma soprattutto umani e famigliari.
+                </div>
+                <div class="modal-text">
+                    <strong>L'evento traumatico:</strong> Nel settembre 2004 all'età di 54 anni, viene ricoverato per essere sottoposto ad alcuni interventi chirurgici, tra cui una delicata operazione congiunta a più fasi a stomaco, pancreas e milza. Durante quest'ultima subisce una perforazione al colon che provocherà gravi infezioni con danni irreparabili agli organi periferici dell'apparato digerente.
+                </div>
+                <div class="modal-text">
+                    <strong>Le conseguenze:</strong> I ricoveri, le visite e gli interventi che subirà nei successivi due anni non miglioreranno la situazione: il paziente continuerà a perdere peso fino ad arrivare a 35 kg, manterrà costantemente uno stato febbrile tra i 38 e i 40 gradi e le infezioni (non correttamente sanate) degenereranno in una candida interna compromettendo la sua capacità respiratoria.
+                </div>
+                <div class="modal-text">
+                    <strong>Lo stato attuale:</strong> Mario dimostra 30 anni in più rispetto alla sua età biologica ed è costretto ad alimentarsi e bere pochissimo per la mancanza di organi vitali. Una storia di resilienza e sofferenza che ha trovato giustizia attraverso il risarcimento.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal per Paola -->
+    <div id="paolaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h2 class="modal-title">Paola, 37 anni</h2>
+                <button class="close-btn" onclick="closeModal('paola')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="case-number">Caso 3</div>
+                <div class="modal-text">
+                    <strong>La storia di Paola:</strong> Abbiamo conosciuto Paola, il marito Fabio e la loro splendida bambina Noemi. Ci hanno accolto nella loro casa per qualche giorno, li abbiamo seguiti nelle loro vite quotidiane, anche al lavoro.
+                </div>
+                <div class="modal-text">
+                    <strong>Una storia di coraggio:</strong> Questo video racconta la storia di una ragazza, moglie e mamma di grande coraggio e forza d'animo. E di come la sua storia sia diventata anche la storia della sua famiglia: un percorso di vita, di recupero fisico e psicologico a seguito del danno da malasanità subito.
+                </div>
+                <div class="modal-text">
+                    <strong>Il percorso di recupero:</strong> La famiglia, la fisioterapia, il lavoro sono i punti centrali della nuova vita di Paola, affrontata con personalità e grande passione. Una testimonianza di come, con il giusto supporto, sia possibile ricostruire una vita piena e consapevole nonostante i traumi.
+                </div>
+                <div class="modal-text">
+                    <em>La storia di Paola rappresenta la speranza e la resilienza di chi, pur avendo subìto un danno ingiusto, ha trovato la forza di riprendere in mano la propria vita.</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(caseId) {
+            const modalId = caseId + 'Modal';
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(caseId) {
+            const modalId = caseId + 'Modal';
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Chiudi il modal quando clicchi al di fuori del content
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Chiudi il modal quando premi ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal.active');
+                modals.forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

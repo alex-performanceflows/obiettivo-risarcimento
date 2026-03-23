@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.obiettivorisarcimento.it)",
+      "WebSearch",
+      "Bash(osascript -e 'tell application \"\"Google Chrome\"\" to make new tab at end of tabs of front window with properties {URL:\"\"https://maps.google.com/?q=Obiettivo+Risarcimento+Villorba+Treviso\"\"}')",
+      "Bash(osascript -e 'tell application \"\"Google Chrome\"\" to get URL of active tab of front window')",
+      "WebFetch(domain:www.google.com)",
+      "WebFetch(domain:www.paginegialle.it)",
+      "Bash(osascript:*)"
+    ]
+  }
+}
